@@ -4,109 +4,88 @@
     boolean isLogin = false;
     String message = null;
 
-    if ( "login".equals(act) ) {
-      
-      Db db = new Db();
-      Connection con = db.createConnection();
-      User user = new User(con);
-      UserLogin ul = new UserLogin();
-      
-      ul.username = request.getParameter("username");
-      ul.password = request.getParameter("password");
-      
-      message = "Login Failed. Please check Username and Password.";
-      
-      try {
-          isLogin = user.login(ul);
-      } catch (Exception e) {
-          message = "System Error: " + e.getMessage();
-      } finally {
-          if(con != null) con.close();
-      }
-      
-      if ( isLogin ){ 
-        session.setAttribute("username", ul.username);
-        response.sendRedirect(request.getContextPath() + "/home.jsp");
-        return;
-      }
+    if ("login".equals(act)) {
+
+        Db db = new Db();
+        Connection con = db.createConnection();
+        User user = new User(con);
+        UserLogin ul = new UserLogin();
+
+        ul.username = request.getParameter("username");
+        ul.password = request.getParameter("password");
+
+        message = "Login Failed. Please check Username and Password.";
+
+        try {
+            isLogin = user.login(ul);
+        } catch (Exception e) {
+            message = "System Error: " + e.getMessage();
+        } finally {
+            if (con != null) con.close();
+        }
+
+        if (isLogin) {
+            session.setAttribute("username", ul.username);
+            response.sendRedirect(request.getContextPath() + "/home.jsp");
+            return;
+        }
     }
 %>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Sign in - Q2 Webpro</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8">
+        <title>Sign in - Academic System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="<%= request.getContextPath() %>/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="<%= request.getContextPath() %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    
-    <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-    </style>
-  </head>
+        <!-- Bootstrap 5 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <body>
+        <!-- Custom Styles -->
+        <link href="assets/css/login.css" rel="stylesheet">
+    </head>
 
-    <div class="container">
-    
-      <form class="form-signin" method="POST" action="login.jsp">
-    
-        <% if(message != null){ %>
-          <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Warning!</strong> <%=message%>
-          </div>
-        <% } %>
-        
-        <input type="hidden" name="act" value="login" />
-        <h2 class="form-signin-heading">Please sign in</h2>
-        
-        <input type="text" name="username" class="input-block-level" placeholder="Username" required>
-        <input type="password" name="password" class="input-block-level" placeholder="Password" required>
-        
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-        
-        <div style="margin-top: 15px; text-align: center;">
-          Don't have an account? <a href="register.jsp">Register</a>
-          <br>
-          <a href="index.jsp">Back to Home</a>
+    <body>
+
+        <div class="login-card">
+
+            <h2 class="login-title">Sign In</h2>
+
+            <% if (message != null) { %>
+                <div class="alert alert-danger text-start">
+                    <strong>Failed!</strong> <%= message %>
+                </div>
+            <% } %>
+
+            <form method="POST" action="login.jsp">
+                <input type="hidden" name="act" value="login" />
+
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-semibold">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                </div>
+
+                <button class="btn btn-primary mt-2" type="submit">Sign In</button>
+
+                <div class="mt-3 small-links">
+                    Don't have an account? <a href="register.jsp">Register</a><br>
+                    <a href="index.jsp">Back to Home</a>
+                </div>
+            </form>
+
         </div>
-      </form>
 
-    </div> <script src="<%= request.getContextPath() %>/assets/js/jquery.js"></script>
-    <script src="<%= request.getContextPath() %>/assets/js/bootstrap.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  </body>
+    </body>
 </html>

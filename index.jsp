@@ -5,85 +5,89 @@
         return;
     }
 %>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Welcome - Academic System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <title>Welcome - Academic System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="<%= request.getContextPath() %>/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="<%= request.getContextPath() %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
-      .hero-unit {
-        text-align: center;
-        background-color: #fff;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-    </style>
-</head>
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<body>
+        <!-- Bootstrap 5 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#">Academic Information System</a>
+        <!-- Custom Styles -->
+        <link href="assets/css/welcome.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="#">Academic System</a>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <div class="hero-section mt-5">
+            <div class="hero-box">
+                <h1>Welcome to AIS</h1>
+                <p class="lead mt-3">
+                    Manage Students, Academic Data, and Study Programs efficiently.<br>
+                    Please sign in to continue or create a new account.
+                </p>
+
+                <div class="mt-4">
+                    <a href="login.jsp" class="btn btn-primary btn-lg px-4 me-2">
+                        Sign In
+                    </a>
+
+                    <a href="register.jsp" class="btn btn-success btn-lg px-4">
+                        Register Now
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
+        <!-- FEATURES -->
+        <div class="container mb-5">
+            <div class="row g-4">
 
-      <div class="hero-unit">
-        <h1>Welcome to AIS</h1>
-        <p class="lead">
-            Manage Students, Study Programs, and Academic Data efficiently.<br>
-            Please sign in to continue or create a new account.
-        </p>
-        <br>
-        <p>
-          <a href="login.jsp" class="btn btn-primary btn-large">
-            <i class="icon-user icon-white"></i> Sign In
-          </a>
-          &nbsp; OR &nbsp;
-          <a href="register.jsp" class="btn btn-success btn-large">
-            <i class="icon-pencil icon-white"></i> Register Now
-          </a>
-        </p>
-      </div>
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <h4 class="fw-semibold">Data Management</h4>
+                        <p class="mt-2">Manage student data, import/export CSV, and maintain academic information easily.</p>
+                    </div>
+                </div>
 
-      <div class="row">
-        <div class="span4">
-          <h2><i class="icon-book"></i> Data Management</h2>
-          <p>Easily manage student data, export/import CSV files, and track academic progress.</p>
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <h4 class="fw-semibold">Secure Access</h4>
+                        <p class="mt-2">Role-based access control ensures data security for all users.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="feature-box text-center">
+                        <h4 class="fw-semibold">Easy to Use</h4>
+                        <p class="mt-2">Responsive layout designed for both desktop and mobile devices.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="span4">
-          <h2><i class="icon-lock"></i> Secure Access</h2>
-          <p>Role-based security ensures that only authorized personnel can access sensitive data.</p>
-       </div>
-        <div class="span4">
-          <h2><i class="icon-th-list"></i> Easy to Use</h2>
-          <p>Built with a simple, responsive interface that works on desktop and mobile devices.</p>
-        </div>
-      </div>
 
-      <hr>
+        <!-- FOOTER -->
+        <footer>
+            &copy; Q2 Web Programming D 2025 - Academic System
+        </footer>
 
-      <footer>
-        <p>&copy; Q2 Web Programming D 2025</p>
-      </footer>
+        <!-- BOOTSTRAP SCRIPT -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    </div>
-
-    <script src="<%= request.getContextPath() %>/assets/js/jquery.js"></script>
-    <script src="<%= request.getContextPath() %>/assets/js/bootstrap.js"></script>
-
-</body>
+    </body>
 </html>

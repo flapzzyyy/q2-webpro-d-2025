@@ -1,14 +1,18 @@
-    </div> <hr>
+        </div>
+        
+        <footer class="footer-modern">
+            <div class="container text-center">
+                <p class="footer-copy">&copy; Q2 Web Programming D 2025 - All rights reserved.</p>
+            </div>
+        </footer>
 
-    <footer class="container">
-        <p>&copy; Q2 Web Programming D 2025</p>
-    </footer>
+        <!-- JS -->
+        <script src="<%= request.getContextPath() %>/assets/js/jquery.js"></script>
+        <script src="<%= request.getContextPath() %>/assets/js/bootstrap.js"></script>
 
-    <script src="<%= request.getContextPath() %>/assets/js/jquery.js"></script>
-    <script src="<%= request.getContextPath() %>/assets/js/bootstrap.js"></script>
-
-   </body>
+    </body>
 </html>
+
 
 <%
     if (con != null) {

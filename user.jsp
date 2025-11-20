@@ -87,74 +87,97 @@ else if("delete".equals(act)){
 <% } %>
 
 <div class="row">
+
+    <!-- FORM -->
     <div class="span4">
-        <form method="post" action="user.jsp" class="well">
-            <input type="hidden" name="act" value="<%=actForm%>" />
-            <fieldset>
-                <legend><%=actForm.toUpperCase()%> USER</legend>
-                
-                <label>Username</label>
-                <% if (( "updatePass".equals(actForm) || "delete".equals(actForm) ) || "updateKodeRole".equals(actForm) ) {%>
-                    <input type="hidden" name="username" value="<%=varUtil.show(obj.username)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(obj.username)%></span>
-                <% }else{ %>
-                    <input type="text" name="username" value="<%=varUtil.show(obj.username)%>" class="input-block-level" required />
-                <% } %>
-                
-                <% if("updatePass".equals(actForm) || "insert".equals(actForm)){ %>
-                    <label>Password</label>
-                    <input type="password" name="password" class="input-block-level" required />
-                <% } %>
-                
-                <% if("updateKodeRole".equals(actForm) || "insert".equals(actForm)){ %>
-                    <label>Role</label>
-                    <select name="kode_role" class="input-block-level">
-                    <% for(RoleObject jo : daftarRole){ 
-                        String selected = (jo.kode == obj.kode_role) ? "selected='selected'" : "";
-                    %>
-                        <option value="<%=jo.kode%>" <%=selected%>><%=jo.nama%></option>
+        <div class="role-card">
+
+            <form method="post" action="user.jsp">
+                <input type="hidden" name="act" value="<%=actForm%>" />
+
+                <fieldset>
+                    <legend><%=actForm.toUpperCase()%> USER</legend>
+
+                    <label>Username</label>
+                    <% if ("updatePass".equals(actForm) || "updateKodeRole".equals(actForm) || "delete".equals(actForm)) { %>
+                        <input type="hidden" name="username" value="<%=obj.username%>" />
+                        <span class="input-block-level uneditable-input"><%=obj.username%></span>
+                    <% } else { %>
+                        <input type="text" name="username" value="<%= ("insert".equals(actForm) ? "" : obj.username) %>" class="input-block-level" required />
                     <% } %>
-                    </select>
-                <% } %>
-                
-                <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary"><%=actForm.toUpperCase()%></button>
-                    <a href="user.jsp" class="btn">Reset</a>
-                </div>
-            </fieldset>
-        </form>
+
+                    <% if("updatePass".equals(actForm) || "insert".equals(actForm)) { %>
+                        <label>Password</label>
+                        <input type="password" name="password" class="input-block-level" required />
+                    <% } %>
+
+                    <% if("updateKodeRole".equals(actForm) || "insert".equals(actForm)) { %>
+                        <label>Role</label>
+                        <select name="kode_role" class="select-block-level">
+                            <% for(RoleObject r : daftarRole){
+                               String selected = (r.kode == obj.kode_role) ? "selected='selected'" : "";
+                            %>
+                            <option value="<%=r.kode%>" <%=selected%>><%=r.nama%></option>
+                            <% } %>
+                        </select>
+                    <% } %>
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary"><%=actForm.toUpperCase()%></button>
+                        <a href="user.jsp" class="btn btn-default">Reset</a>
+                    </div>
+                </fieldset>
+
+            </form>
+
+        </div>
     </div>
 
+    <!-- TABLE -->
     <div class="span8">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
+        <div class="role-table-wrapper">
+            <table class="table table-striped table-modern table-bordered table-hover">
+
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th style="width:180px;">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <%
+                List<UserObject> daftar = user.list();
+                for(UserObject ro : daftar){
+                    RoleObject roo = role.get(ro.kode_role);
+                %>
                 <tr>
-                    <th>Username</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%
-            List<UserObject> daftar = user.list();
-            for(UserObject ro : daftar){
-                RoleObject roo = role.get(ro.kode_role);
-            %>
-                <tr>
-                    <td><%=varUtil.show(ro.username)%></td>
-                    <td><%=varUtil.show(roo.nama)%></td>
+                    <td><%=ro.username%></td>
+                    <td><%=roo.nama%></td>
+                    
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-mini" href="?act=editPass&username=<%=ro.username%>" title="Ganti Password"><i class="icon-lock"></i> Password</a>
-                            <a class="btn btn-mini" href="?act=editRole&username=<%=ro.username%>" title="Ganti Role"><i class="icon-user"></i> Role</a>
-                            <a class="btn btn-mini btn-danger" href="?act=del&username=<%=ro.username%>" title="Hapus"><i class="icon-trash icon-white"></i></a>
+                            <a class="btn btn-mini btn-info action-btn" href="?act=editPass&username=<%=ro.username%>">
+                                <i class="fa fa-pencil"></i> Password
+                            </a>
+                            <a class="btn btn-mini action-btn" href="?act=editRole&username=<%=ro.username%>">
+                                <i class="fa fa-pencil"></i> Role
+                            </a>
+                            <a class="btn btn-mini btn-danger" href="?act=del&username=<%=ro.username%>">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
                         </div>
                     </td>
+
                 </tr>
-            <% } %>
-            </tbody>
-        </table>
+                <% } %>
+                </tbody>
+
+            </table>
+        </div>
     </div>
+
 </div>
 
 <%@ include file="part/footer.jsp" %>

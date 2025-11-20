@@ -1,34 +1,58 @@
 <%@ include file="part/header.jsp" %>
 
-    <div class="hero-unit">
-        <h1>Welcome, <%= userLogin.username %>!</h1>
-        
-        <p>This is the Academic Information System Dashboard.</p>
-        <p>
-            <a href="mahasiswa.jsp" class="btn btn-primary btn-large">
-                Manage Mahasiswa &raquo;
-            </a>
-            <a href="prodi.jsp" class="btn btn-info btn-large">
-                View Prodi &raquo;
-            </a>
+<div class="container content-wrapper">
+
+    <!-- HERO -->
+    <div class="home-hero">
+        <h1>Welcome, <%= userLogin.username %></h1>
+        <p class="subtext">
+            This is your Academic Information System Dashboard.<br>
+            Manage academic data quickly and efficiently.
         </p>
+
+        <div class="hero-buttons">
+            <a href="mahasiswa.jsp" class="btn btn-primary btn-large">Manage Mahasiswa</a>
+            <a href="prodi.jsp" class="btn btn-info btn-large">View Prodi</a>
+        </div>
     </div>
 
+    <!-- 3 Feature Boxes -->
     <div class="row">
+
         <div class="span4">
-            <h2>User Profile</h2>
-            <p>Logged in as: <strong><%= username %></strong></p>
-            
-            <p>Role: <span class="label label-success"><%= roleLogin.nama %></span></p>
+            <div class="home-box">
+                <h4>User Profile</h4>
+
+                <p class="title">Logged in as:</p>
+                <p class="value"><%= username %></p>
+
+                <p class="title">Role:</p>
+                <span class="badge badge-success"><%= roleLogin.nama %></span>
+            </div>
         </div>
+
         <div class="span4">
-            <h2>Quick Status</h2>
-            <p>System is running normally.</p>
+            <div class="home-box">
+                <h4>System Status</h4>
+                <p class="text-muted">
+                    System is running normally.<br>
+                    All modules operational.
+                </p>
+            </div>
         </div>
+
         <div class="span4">
-            <h2>Help</h2>
-            <p>Contact the administrator if you have issues.</p>
+            <div class="home-box">
+                <h4>Help & Support</h4>
+                <p class="text-muted">
+                    Contact the administrator if you encounter difficulties.
+                </p>
+                <a href="#" class="btn btn-support">Contact Support</a>
+            </div>
         </div>
+
     </div>
+
+</div>
 
 <%@ include file="part/footer.jsp" %>

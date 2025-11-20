@@ -10,9 +10,7 @@
             Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.
       </p>
       <p style="margin-top: 30px;">
-            <a href="home.jsp" class="btn btn-danger btn-large">
-                  <i class="icon-home icon-white"></i> Kembali ke Dashboard
-            </a>
+            <a href="home.jsp" class="btn btn-danger btn-large">Kembali ke Dashboard</a>
       </p>
 </div>
 

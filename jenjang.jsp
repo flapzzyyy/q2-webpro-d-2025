@@ -64,63 +64,88 @@ else if("delete".equals(act)){
 <% } %>
 
 <div class="row">
+
+    <!-- FORM CARD -->
     <div class="span4">
-        <form method="post" action="jenjang.jsp" class="well">
-            <input type="hidden" name="act" value="<%=actForm%>" />
-            <fieldset>
-                <legend><%=actForm.toUpperCase()%> JENJANG</legend>
-                
-                <label>Kode</label>
-                <% if ( "update".equals(actForm) || "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="kode" value="<%=varUtil.show(obj.kode)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(obj.kode)%></span>
-                <% }else{ %>
-                    <input type="text" name="kode" value="<%=varUtil.show(obj.kode)%>" class="input-block-level" required />
-                <% } %>
-                
-                <label>Nama Jenjang</label>
-                <% if("delete".equals(actForm)){ %>
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(obj.nama)%></span>
-                <% } else { %>
-                    <input type="text" name="nama" value="<%=varUtil.show(obj.nama)%>" class="input-block-level" required />
-                <% } %>
-                
-                <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary"><%=actForm.toUpperCase()%></button>
-                    <a href="jenjang.jsp" class="btn">Reset</a>
-                </div>
-            </fieldset>
-        </form>
+        <div class="role-card">
+
+            <form method="post" action="jenjang.jsp">
+                <input type="hidden" name="act" value="<%=actForm%>" />
+
+                <fieldset>
+                    <legend><%=actForm.toUpperCase()%> JENJANG</legend>
+
+                    <!-- KODE JENJANG -->
+                    <label>Kode</label>
+                    <% if ( "update".equals(actForm) || "delete".equals(actForm) ) { %>
+                        <input type="hidden" name="kode" value="<%=varUtil.show(obj.kode)%>" />
+                        <span class="input-block-level uneditable-input"><%=varUtil.show(obj.kode)%></span>
+                    <% } else { %>
+                        <input type="text" name="kode" value="<%=varUtil.show(obj.kode)%>"
+                               class="input-block-level" required />
+                    <% } %>
+
+                    <!-- NAMA JENJANG -->
+                    <label>Nama Jenjang</label>
+                    <% if("delete".equals(actForm)){ %>
+                        <span class="input-block-level uneditable-input"><%=varUtil.show(obj.nama)%></span>
+                    <% } else { %>
+                        <input type="text" name="nama" value="<%=varUtil.show(obj.nama)%>"
+                               class="input-block-level" required />
+                    <% } %>
+
+                    <!-- BUTTONS -->
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary">
+                            <%=actForm.toUpperCase()%>
+                        </button>
+                        <a href="jenjang.jsp" class="btn btn-default">Reset</a>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
     </div>
 
+    <!-- TABLE CARD -->
     <div class="span8">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Kode</th>
-                    <th>Nama Jenjang</th>
-                    <th style="width: 100px;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%
-            List<JenjangObject> daftar = jenjang.list();
-            for(JenjangObject ro : daftar){
-            %>
-                <tr>
-                    <td><%=varUtil.show(ro.kode)%></td>
-                    <td><%=varUtil.show(ro.nama)%></td>
-                    <td>
-                        <div class="btn-group">
-                            <a class="btn btn-mini btn-info" href="?act=edit&kode=<%=ro.kode%>"><i class="icon-edit icon-white"></i></a>
-                            <a class="btn btn-mini btn-danger" href="?act=del&kode=<%=ro.kode%>"><i class="icon-trash icon-white"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            <% } %>
-            </tbody>
-        </table>
+        <div class="role-table-wrapper">
+            <table class="table table-striped table-modern table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama Jenjang</th>
+                        <th style="width: 140px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <%
+                List<JenjangObject> daftar = jenjang.list();
+                for(JenjangObject ro : daftar){
+                %>
+                    <tr>
+                        <td><%=varUtil.show(ro.kode)%></td>
+                        <td><%=varUtil.show(ro.nama)%></td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-mini btn-info action-btn"
+                                href="?act=edit&kode=<%=ro.kode%>">
+                                    <i class="fa fa-pencil"></i> Update
+                                </a>
+                                <a class="btn btn-mini btn-danger"
+                                href="?act=del&kode=<%=ro.kode%>">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
 
 <%@ include file="part/footer.jsp" %>

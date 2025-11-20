@@ -67,50 +67,71 @@ if ( "import".equals(act) ) {
     <h1>Import Data Mahasiswa</h1>
 </div>
 
+<!-- INFO BOX -->
 <div class="row">
     <div class="span12">
-        <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Petunjuk:</strong> Silahkan download template CSV terlebih dahulu, isi data, lalu upload kembali.
+        <div class="role-card" style="border-left:5px solid #4cc9f0;">
+            <strong>Petunjuk:</strong><br/>
+            Silakan download template CSV terlebih dahulu, isi data, lalu upload kembali.
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="span6">
-        <% if(message != null){ %>
-            <div class="alert alert-error">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Error!</strong> <%=message%>
-            </div>
-        <% } %>
+<div class="row" style="margin-top:20px;">
 
-        <form method="post" action="mahasiswa-import-dialog.jsp?act=<%=actForm%>" enctype="multipart/form-data" class="well">
-            <fieldset>
-                <legend>Upload CSV</legend>
-                
-                <label>Pilih File CSV</label>
-                <input type="file" name="file" class="input-block-level" required />
-                
-                <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary"><i class="icon-upload icon-white"></i> Upload & Proses</button>
-                    <a href="mahasiswa.jsp" class="btn">Batal</a>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    
+    <!-- FORM UPLOAD -->
     <div class="span6">
-        <div class="well">
-            <h3>Template Data</h3>
-            <p>Gunakan file ini sebagai acuan format data.</p>
-            <p>
-                <a href="mahasiswa-template.csv" target="_blank" class="btn btn-success btn-large">
-                    <i class="icon-download-alt icon-white"></i> Download Template CSV
-                </a>
-            </p>
+        <div class="role-card">
+
+            <% if(message != null){ %>
+                <div class="alert alert-error" style="margin-bottom: 15px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error!</strong> <%=message%>
+                </div>
+            <% } %>
+
+            <form method="post"
+                  action="mahasiswa-import-dialog.jsp?act=<%=actForm%>"
+                  enctype="multipart/form-data">
+
+                <fieldset>
+                    <legend>UPLOAD CSV</legend>
+
+                    <label>Pilih File CSV</label>
+                    <input type="file" name="file"
+                           class="select-block-level"
+                           style="padding:10px; border-radius:10px;"
+                           required />
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary">
+                            Upload & Proses
+                        </button>
+                        <a href="mahasiswa.jsp" class="btn btn-default">Batal</a>
+                    </div>
+                </fieldset>
+
+            </form>
         </div>
     </div>
+
+    <!-- TEMPLATE CSV DOWNLOAD -->
+    <div class="span6">
+        <div class="role-card" style="text-align:center;">
+
+            <h3 style="font-weight:600; margin-bottom:10px;">Template CSV</h3>
+            <p style="color:#666;">Gunakan file ini sebagai acuan format data.</p>
+
+            <a href="mahasiswa-template.csv"
+               target="_blank"
+               class="btn btn-success btn-large"
+               style="margin-top:10px; border-radius:12px;">
+               Download Template CSV
+            </a>
+
+        </div>
+    </div>
+
 </div>
 
 <%@ include file="part/footer.jsp" %>

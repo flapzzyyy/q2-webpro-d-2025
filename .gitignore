@@ -1,5 +1,4 @@
 .vscode/
-
 *.class
 *.log
 *.ctxt
@@ -13,3 +12,4 @@
 *.rar
 hs_err_pid*
 replay_pid*
+*.jar

@@ -91,16 +91,17 @@ CREATE TABLE `user` (
 
 -- Passwords (MD5):
 -- admin / admin -> 21232f297a57a5a743894a0e4a801fc3
--- dosen / dosen -> ce28eed1511f631af6b2a7aa0a8bbd74
+-- dosen / dosen -> ce28eed1511f631af6b2a7bb0a85d636
+-- tendik / tendik -> b8f8d5eba982ebdb42956582a429524f
 -- mhs / 123456  -> e10adc3949ba59abbe56e057f20f883e
 
 INSERT INTO `user` VALUES 
 -- Admin & Staff
 ('admin','21232f297a57a5a743894a0e4a801fc3',1),
-('budi_staff', '9778c96118e3f11d2db7df270d8de587',3),
+('budi_tendik', 'b8f8d5eba982ebdb42956582a429524f',3),
 -- Dosen
-('dosen_ti', 'ce28eed1511f631af6b2a7aa0a8bbd74',2),
-('dosen_si', 'ce28eed1511f631af6b2a7aa0a8bbd74',2),
+('dosen_ti', 'ce28eed1511f631af6b2a7bb0a85d636',2),
+('dosen_si', 'ce28eed1511f631af6b2a7bb0a85d636',2),
 -- Mahasiswa (mhs01 - mhs15)
 ('mhs01', 'e10adc3949ba59abbe56e057f20f883e', 4),
 ('mhs02', 'e10adc3949ba59abbe56e057f20f883e', 4),

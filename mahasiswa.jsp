@@ -80,11 +80,12 @@
     <h1>Manajemen Mahasiswa</h1>
 </div>
 
-<div class="btn-toolbar">
+<!-- TOOLBAR -->
+<div class="btn-toolbar" style="margin-bottom:20px;">
     <div class="btn-group">
-        <a href="mahasiswa.jsp" class="btn btn-success"><i class="icon-plus icon-white"></i> Tambah Mahasiswa</a>
-        <a href="mahasiswa-export.jsp" target="_blank" class="btn"><i class="icon-download"></i> Export Data</a>
-        <a href="mahasiswa-import-dialog.jsp" class="btn"><i class="icon-upload"></i> Import Data</a>
+        <a href="mahasiswa.jsp" class="btn btn-success">Tambah Mahasiswa</a>
+        <a href="mahasiswa-export.jsp" target="_blank" class="btn">Export Data</a>
+        <a href="mahasiswa-import-dialog.jsp" class="btn">Import Data</a>
     </div>
 </div>
 
@@ -96,115 +97,141 @@
 <% } %>
 
 <div class="row">
+
+    <!-- FORM -->
     <div class="span4">
-        <form method="post" action="mahasiswa.jsp" class="well">
-            <input type="hidden" name="act" value="<%=actForm%>" />
-            <fieldset>
-                <legend><%=actForm.toUpperCase()%> DATA</legend>
-                
-                <label>NIM</label>
-                <% if ( "update".equals(actForm) || "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="nim" value="<%=varUtil.show(obj.nim)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(obj.nim)%></span>
-                <% }else{ %>
-                    <input type="text" name="nim" value="<%=varUtil.show(obj.nim)%>" class="input-block-level" required />
-                <% } %>
-                
-                <label>Nama Lengkap</label>
-                <% if ( "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="nama" value="<%=varUtil.show(obj.nama)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(obj.nama)%></span>
-                <% }else{ %>
-                    <input type="text" name="nama" value="<%=varUtil.show(obj.nama)%>" class="input-block-level" required />
-                <% } %>
-                
-                <label>Jenis Kelamin</label>
-                <% if ( "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="kode_jenis_kelamin" value="<%=varUtil.show(obj.kode_jenis_kelamin)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(jkObj.nama)%></span>
-                <% }else{ %>
-                    <select name="kode_jenis_kelamin" class="input-block-level">
-                        <% for(JenisKelaminObject jkO : daftarJenisKelamin){ 
-                            String selected = (obj.kode_jenis_kelamin == jkO.kode) ? "selected='selected'" : "";
-                        %>
-                        <option value="<%=jkO.kode%>" <%=selected%>><%=jkO.nama%></option>
-                        <% } %>
-                    </select>
-                <% } %>
-                
-                <label>Program Studi</label>
-                <% if ( "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="kode_prodi" value="<%=varUtil.show(obj.kode_prodi)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(pObj.nama)%></span>
-                <% }else{ %>
-                    <select name="kode_prodi" class="input-block-level">
-                        <% for(ProdiObject pO : daftarProdi){ 
-                            String selected = (obj.kode_prodi == pO.kode) ? "selected='selected'" : "";
-                        %>
-                        <option value="<%=pO.kode%>" <%=selected%>><%=pO.nama%></option>
-                        <% } %>
-                    </select>
-                <% } %>
-                
-                <label>Username (Login)</label>
-                <% if ( "delete".equals(actForm) ) {%>
-                    <input type="hidden" name="username" value="<%=varUtil.show(obj.username)%>" />
-                    <span class="input-block-level uneditable-input"><%=varUtil.show(uObj.username)%></span>
-                <% }else{ %>
-                    <select name="username" class="input-block-level">
-                        <% for(UserObject uO : daftarUser){ 
-                            String selected = (uO.username.equals(obj.username)) ? "selected='selected'" : "";
-                        %>
-                        <option value="<%=uO.username%>" <%=selected%>><%=uO.username%></option>
-                        <% } %>
-                    </select>
-                <% } %>
-                
-                <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary"><%=actForm.toUpperCase()%></button>
-                    <a href="mahasiswa.jsp" class="btn">Cancel</a>
-                </div>
-            </fieldset>
-        </form>
+        <div class="role-card">
+
+            <form method="post" action="mahasiswa.jsp">
+                <input type="hidden" name="act" value="<%=actForm%>" />
+
+                <fieldset>
+                    <legend><%=actForm.toUpperCase()%> DATA</legend>
+
+                    <!-- NIM -->
+                    <label>NIM</label>
+                    <% if("update".equals(actForm) || "delete".equals(actForm)) { %>
+                        <input type="hidden" name="nim" value="<%=obj.nim%>" />
+                        <span class="input-block-level uneditable-input"><%=obj.nim%></span>
+                    <% } else { %>
+                        <input type="text" name="nim" value="<%= ("insert".equals(actForm) ? "" : obj.nim) %>" class="input-block-level" required />
+                    <% } %>
+
+                    <!-- NAMA -->
+                    <label>Nama Lengkap</label>
+                    <% if("delete".equals(actForm)) { %>
+                        <input type="hidden" name="nama" value="<%=obj.nama%>" />
+                        <span class="input-block-level uneditable-input"><%=obj.nama%></span>
+                    <% } else { %>
+                        <input type="text" name="nama" value="<%= ("insert".equals(actForm) ? "" : obj.nama) %>" class="input-block-level" required />
+                    <% } %>
+
+                    <!-- JK -->
+                    <label>Jenis Kelamin</label>
+                    <% if("delete".equals(actForm)) { %>
+                        <input type="hidden" name="kode_jenis_kelamin" value="<%=obj.kode_jenis_kelamin%>" />
+                        <span class="input-block-level uneditable-input"><%=jkObj.nama%></span>
+                    <% } else { %>
+                        <select name="kode_jenis_kelamin" class="select-block-level">
+                            <% for(JenisKelaminObject jO : daftarJenisKelamin){
+                                String selected = (jO.kode == obj.kode_jenis_kelamin) ? "selected='selected'" : "";
+                            %>
+                            <option value="<%=jO.kode%>" <%=selected%>><%=jO.nama%></option>
+                            <% } %>
+                        </select>
+                    <% } %>
+
+                    <!-- PRODI -->
+                    <label>Program Studi</label>
+                    <% if("delete".equals(actForm)) { %>
+                        <input type="hidden" name="kode_prodi" value="<%=obj.kode_prodi%>" />
+                        <span class="input-block-level uneditable-input"><%=pObj.nama%></span>
+                    <% } else { %>
+                        <select name="kode_prodi" class="select-block-level">
+                            <% for(ProdiObject pO : daftarProdi){
+                               String selected = (pO.kode == obj.kode_prodi) ? "selected='selected'" : "";
+                            %>
+                            <option value="<%=pO.kode%>" <%=selected%>><%=pO.nama%></option>
+                            <% } %>
+                        </select>
+                    <% } %>
+
+                    <!-- USERNAME -->
+                    <label>Username Login</label>
+                    <% if("delete".equals(actForm)) { %>
+                        <input type="hidden" name="username" value="<%=obj.username%>" />
+                        <span class="input-block-level uneditable-input"><%=uObj.username%></span>
+                    <% } else { %>
+                        <select name="username" class="select-block-level">
+                            <% for(UserObject uO : daftarUser){
+                                String selected = (uO.username.equals(obj.username)) ? "selected='selected'" : "";
+                            %>
+                            <option value="<%=uO.username%>" <%=selected%>><%=uO.username%></option>
+                            <% } %>
+                        </select>
+                    <% } %>
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary"><%=actForm.toUpperCase()%></button>
+                        <a href="mahasiswa.jsp" class="btn btn-default">Cancel</a>
+                    </div>
+
+                </fieldset>
+
+            </form>
+
+        </div>
     </div>
 
+    <!-- TABLE -->
     <div class="span8">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
+        <div class="role-table-wrapper">
+            <table class="table table-striped table-modern table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama</th>
+                        <th>L/P</th>
+                        <th>Prodi</th>
+                        <th>Username</th>
+                        <th style="width:140px;">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <%
+                List<MahasiswaObject> daftar = mahasiswa.list();
+                for(MahasiswaObject d : daftar){
+                    UserObject uO = user.get(d.username);
+                    JenisKelaminObject jkO = jenisKelamin.get(d.kode_jenis_kelamin);
+                    ProdiObject pO = prodi.get(d.kode_prodi);
+                %>
                 <tr>
-                    <th>NIM</th>
-                    <th>Nama</th>
-                    <th>L/P</th>
-                    <th>Prodi</th>
-                    <th>Username</th>
-                    <th style="width: 100px;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%
-            List<MahasiswaObject> daftar = mahasiswa.list();
-            for(MahasiswaObject ro : daftar){
-                UserObject uO = user.get(ro.username);
-                JenisKelaminObject jkO = jenisKelamin.get(ro.kode_jenis_kelamin);
-                ProdiObject pO = prodi.get(ro.kode_prodi);
-            %>
-                <tr>
-                    <td><%=varUtil.show(ro.nim)%></td>
-                    <td><%=varUtil.show(ro.nama)%></td>
-                    <td><%=varUtil.show(jkO.nama)%></td>
-                    <td><%=varUtil.show(pO.nama)%></td>
-                    <td><%=varUtil.show(uO.username)%></td>
+                    <td><%=d.nim%></td>
+                    <td><%=d.nama%></td>
+                    <td><%=jkO.nama%></td>
+                    <td><%=pO.nama%></td>
+                    <td><%=uO.username%></td>
+
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-mini btn-info" href="?act=edit&nim=<%=ro.nim%>"><i class="icon-edit icon-white"></i></a>
-                            <a class="btn btn-mini btn-danger" href="?act=del&nim=<%=ro.nim%>"><i class="icon-trash icon-white"></i></a>
+                            <a class="btn btn-mini btn-info action-btn" href="?act=edit&nim=<%=d.nim%>">
+                                <i class="fa fa-pencil"></i> Update
+                            </a>
+                            <a class="btn btn-mini btn-danger" href="?act=del&nim=<%=d.nim%>">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
                         </div>
                     </td>
+
                 </tr>
-            <% } %>
-            </tbody>
-        </table>
+                <% } %>
+                </tbody>
+
+            </table>
+        </div>
     </div>
+
 </div>
 
 <%@ include file="part/footer.jsp" %>
