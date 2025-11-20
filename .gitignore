@@ -3,7 +3,6 @@
 *.log
 *.ctxt
 .mtj.tmp/
-*.jar
 *.war
 *.nar
 *.ear
@@ -12,4 +11,3 @@
 *.rar
 hs_err_pid*
 replay_pid*
-*.jar
